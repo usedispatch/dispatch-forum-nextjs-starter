@@ -19,12 +19,19 @@ const DispatchApp = ({
     const { connection } = useConnection();
     const wallet = useWallet();
 
+    function buildForumPath(collectionId: string) {
+        return `${forumURL}/${collectionId}`;
+    }
+    
+    function buildTopicPath(collectionId: string, topicId: number) {
+        return `${forumURL}/${collectionId}${topicURL}/${topicId}`;
+    }
+
     const dispatchProps : DispatchAppProps = {
         wallet: wallet,
         connection: connection,
-        baseURL: baseURL,
-        forumURL: forumURL,
-        topicURL: topicURL,
+        buildForumPath: buildForumPath,
+        buildTopicPath: buildTopicPath,
         children: children
     }
 
