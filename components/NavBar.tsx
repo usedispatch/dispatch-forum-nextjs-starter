@@ -3,7 +3,6 @@ import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 export default function NavBar(props: any) {
   const network = props.network;
   const setNetwork = props.setNetwork;
-  console.log(network);
   return (
     <div>
       <div className="networkSelector">

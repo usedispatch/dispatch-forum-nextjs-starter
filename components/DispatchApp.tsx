@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { DispatchProvider, DispatchAppProps } from "@usedispatch/forum";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import * as web3 from "@solana/web3.js";
+import { useRouter } from "next/router";
 interface Props {
   baseURL: string;
   forumURL: string;
@@ -20,6 +21,7 @@ const DispatchApp = ({
 }: Props) => {
   const { connection } = useConnection();
   const wallet = useWallet();
+  const router = useRouter();
 
   function buildForumPath(collectionId: string) {
     return `${forumURL}/${collectionId}`;
@@ -28,6 +30,19 @@ const DispatchApp = ({
   function buildTopicPath(collectionId: string, topicId: number) {
     return `${forumURL}/${collectionId}${topicURL}/${topicId}`;
   }
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      router.reload();
+    };
+
+    window.addEventListener("popstate", handleRouteChange);
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      window.removeEventListener("popstate", handleRouteChange);
+    };
+  }, [router]);
 
   const dispatchProps: DispatchAppProps = {
     wallet: wallet,
