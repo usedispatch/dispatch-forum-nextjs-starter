@@ -21,7 +21,7 @@ import NavBar from "../components/NavBar";
 
 // Use require instead of import since order matters
 require("@solana/wallet-adapter-react-ui/styles.css");
-require("@usedispatch/forum/dist/main.css");
+require("@usedispatch/forum/dist/style.css");
 require("../styles/globals.css");
 
 const baseURL = "http://localhost:3000";
@@ -37,7 +37,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
     if (network === WalletAdapterNetwork.Devnet) {
       return clusterApiUrl(network);
     } else {
-      return "https://ssc-dao.genesysgo.net/";
+      return "https://special-quaint-needle.solana-mainnet.quiknode.pro/e595d0072cc6ba40bc075ed8e030b7a4c53b3ff1/";
     }
   }, [network]);
   const endpoint = useMemo(() => getEndpoint(), [getEndpoint]);
